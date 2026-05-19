@@ -6,7 +6,7 @@ This directory contains the final presentation layer of the Multi-Property GA4 A
 
 ## 🌐 Interactive Dashboard
 
-You can explore the fully interactive version of the dashboard online:
+You can explore the fully interactive version of the dashboard online:    
 👉 **[View the Interactive Report](https://mavenshowcase.com/project/56439)**
 
 You can find all the DAX measures used here:    

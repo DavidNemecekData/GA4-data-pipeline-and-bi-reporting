@@ -27,7 +27,7 @@ This project demonstrates an end-to-end automated analytics solution, bypassing 
 ---
 
 ## 📸 Final Output Preview
-Here is a snapshots of the final reporting layer built on top of the transformed data model.
+Here is a snapshots of the final reporting layer built on top of the transformed data model.    
 **Main Canvas**
 ![Power BI Dashboard Preview](./docs/report_preview_first_page.png)
 **Granular Deep-Dive**
