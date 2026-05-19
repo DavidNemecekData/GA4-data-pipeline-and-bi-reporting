@@ -1,0 +1,457 @@
+Name,Expression
+"Active Users YoY %","
+DIVIDE(
+    [Total Active Users Current Year] - [Total Active Users Previous Year],
+    [Total Active Users Previous Year]
+)"
+"Active Users YoY % Formatted","
+VAR YoY_Value = [Active Users YoY %]
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+VAR Threshold = 0.0005 
+
+VAR Arrow = 
+    SWITCH( TRUE(),
+        YoY_Value >= Threshold, UNICHAR(9650),  -- (▲)
+        YoY_Value <= -Threshold, UNICHAR(9660), -- (▼)
+        BLANK()
+    )
+
+RETURN
+IF(
+    HistoryExists, 
+    Arrow & "" "" & FORMAT(YoY_Value, ""0.0%;0.0%;0.0%""),
+    "" ""
+)"
+"Active Users YoY Diff","
+[Total Active Users Current Year] - [Total Active Users Previous Year]"
+"Average Session Duration (calculated) Current Year","
+DIVIDE(
+    [Total User Engagement Duration Current Year],
+    [Total Sessions Current Year]
+)"
+"Average Session Duration (calculated) Current Year Formatted","
+DIVIDE(
+    [Total User Engagement Duration Current Year],
+    [Total Sessions Current Year]
+)"
+"Average Session Duration (calculated) Previous Year","
+DIVIDE(
+    [Total User Engagement Duration Previous Year],
+    [Total Sessions Previous Year]
+)"
+"Average Session Duration (calculated) Previous Year Formatted","
+DIVIDE(
+    [Total User Engagement Duration Previous Year],
+    [Total Sessions Previous Year]
+)"
+"Average Session Duration (calculated) YoY %","
+DIVIDE(
+    [Average Session Duration (calculated) Current Year] - [Average Session Duration (calculated) Previous Year],
+    [Average Session Duration (calculated) Previous Year]
+)"
+"Average Session Duration (calculated) YoY % Formatted","
+VAR YoY_Value = [Average Session Duration (calculated) YoY %]
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+VAR Threshold = 0.0005 
+
+VAR Arrow = 
+    SWITCH( TRUE(),
+        YoY_Value >= Threshold, UNICHAR(9650),  -- (▲)
+        YoY_Value <= -Threshold, UNICHAR(9660), -- (▼)
+        BLANK()
+    )
+    
+RETURN
+IF(
+    HistoryExists, 
+    Arrow & "" "" & FORMAT(YoY_Value, ""0.0%;0.0%;0.0%""),
+    "" ""
+)"
+"Average Session Duration Current Year (Minutes)","
+DIVIDE([Average Session Duration (calculated) Current Year], 60)"
+"Average Session Duration Previous Year (Minutes)","
+DIVIDE([Average Session Duration (calculated) Previous Year], 60)"
+"Axis_Max_Buffer_Active_Users_Channel","
+MAXX(
+    ALLSELECTED('Data GA4'[channel_group]), 
+    [Total Active Users Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Active_Users_Device","
+MAXX(
+    ALLSELECTED('Data GA4'[device]), 
+    [Total Active Users Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Active_Users_Line","
+VAR MaxValueCY = MAXX(ALLSELECTED('Calendar'[Month]), [Total Active Users Current Year])
+VAR MaxValuePY = MAXX(ALLSELECTED('Calendar'[Month]), [Total Active Users Previous Year])
+VAR OverallMax = MAX(MaxValueCY, MaxValuePY)
+
+RETURN 
+    OverallMax * 1.1"
+"Axis_Max_Buffer_Avg_Sess_Dur_Line","
+VAR MaxValueCY = MAXX(ALLSELECTED('Calendar'[Month]), [Average Session Duration Current Year (Minutes)])
+VAR MaxValuePY = MAXX(ALLSELECTED('Calendar'[Month]), [Average Session Duration Previous Year (Minutes)])
+VAR OverallMax = MAX(MaxValueCY, MaxValuePY)
+
+RETURN 
+    OverallMax * 1.2"
+"Axis_Max_Buffer_Avg_Session_Duration_Channel","
+MAXX(
+    ALLSELECTED('Data GA4'[channel_group]), 
+    [Average Session Duration (calculated) Current Year]
+) * 1.8"
+"Axis_Max_Buffer_Avg_Session_Duration_Device","
+MAXX(
+    ALLSELECTED('Data GA4'[device]), 
+    [Average Session Duration (calculated) Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Engagement_Rate_Channel","
+MAXX(
+    ALLSELECTED('Data GA4'[channel_group]), 
+    [Engagement Rate Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Engagement_Rate_Device","
+MAXX(
+    ALLSELECTED('Data GA4'[device]), 
+    [Engagement Rate Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Sessions_Channel","
+MAXX(
+    ALLSELECTED('Data GA4'[channel_group]), 
+    [Total Sessions Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Sessions_Device","
+MAXX(
+    ALLSELECTED('Data GA4'[device]), 
+    [Total Sessions Current Year]
+) * 1.7"
+"Axis_Max_Buffer_Sessions_Line","
+VAR MaxValueCY = MAXX(ALLSELECTED('Calendar'[Month]), [Total Sessions Current Year])
+VAR MaxValuePY = MAXX(ALLSELECTED('Calendar'[Month]), [Total Sessions Previous Year])
+VAR OverallMax = MAX(MaxValueCY, MaxValuePY)
+
+RETURN 
+    OverallMax * 1.1"
+"Axis_Max_Buffer_Sessions_per_User_Line","
+VAR MaxValueCY = MAXX(ALLSELECTED('Calendar'[Month]), [Sessions Per User Current Year])
+VAR MaxValuePY = MAXX(ALLSELECTED('Calendar'[Month]), [Sessions Per User Previous Year])
+VAR OverallMax = MAX(MaxValueCY, MaxValuePY)
+
+RETURN 
+    OverallMax * 1.2"
+"Axis_Max_Buffer_Sessions_per_Users_Channel","
+MAXX(
+    ALLSELECTED('Data GA4'[channel_group]), 
+    [Sessions Per User Current Year]
+) * 1.5"
+"Axis_Max_Buffer_Sessions_per_Users_Device","
+MAXX(
+    ALLSELECTED('Data GA4'[device]), 
+    [Sessions Per User Current Year]
+) * 1.5"
+"Engaged Sessions YoY %","
+DIVIDE(
+    [Total Engaged Sessions Current Year] - [Total Engaged Sessions Previous Year],
+    [Total Engaged Sessions Previous Year]
+)"
+"Engaged Sessions YoY % Formatted","
+VAR YoY_Value = [Engaged Sessions YoY %]
+VAR Arrow = 
+    IF(
+        YoY_Value > 0, 
+        UNICHAR(9650), -- arrow up ▲
+        IF(
+            YoY_Value < 0, 
+            UNICHAR(9660), -- arrow down ▼
+            ""–"" -- neutral
+        )
+    )
+RETURN
+    Arrow & "" "" & FORMAT(YoY_Value, ""0.0%;0.0%;0.0%"")
+
+
+"
+"Engagement Rate Current Year","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+CALCULATE(
+    [Total Engagement Rate],
+    'Calendar'[Year] = LatestYear
+)"
+"Engagement Rate Previous Year","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+RETURN
+CALCULATE(
+    [Total Engagement Rate],
+    'Calendar'[Year] = YearBefore
+)"
+"Engagement Rate YoY %","
+VAR CurrentVal = [Engagement Rate Current Year]
+VAR PreviousVal = [Engagement Rate Previous Year]
+
+RETURN
+IF(
+    ISBLANK(PreviousVal), 
+    BLANK(),
+    CurrentVal - PreviousVal
+)"
+"Engagement Rate YoY % Formatted","
+VAR YoY_Value = [Engagement Rate YoY %]
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+VAR Threshold = 0.0005 
+
+VAR Arrow = 
+    SWITCH( TRUE(),
+        YoY_Value >= Threshold, UNICHAR(9650),  -- (▲)
+        YoY_Value <= -Threshold, UNICHAR(9660), -- (▼)
+        BLANK()
+    )
+    
+RETURN
+IF(
+    HistoryExists, 
+    Arrow & "" "" & FORMAT(YoY_Value * 100, ""0.0;0.0;0.0"") & "" pp"",
+    "" ""
+)"
+"Legend Name Current Year","
+VAR SelYear = SELECTEDVALUE('Calendar'[Year])
+RETURN 
+""● "" & FORMAT(SelYear, ""0"") "
+"Legend Name Previous Year","
+VAR SelYear = SELECTEDVALUE('Calendar'[Year])
+VAR PrevYear = SelYear - 1
+VAR HistoryExist = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = PrevYear
+    ) > 0
+
+RETURN 
+IF(
+    HistoryExist,
+    ""● "" & FORMAT(PrevYear, ""0""),
+    "" ""
+)"
+"Sessions Per User","
+DIVIDE(
+    [Total Sessions],
+    [Total Active Users]
+)"
+"Sessions Per User Current Year","
+DIVIDE(
+    [Total Sessions Current Year],
+    [Total Active Users Current Year]
+)"
+"Sessions Per User Previous Year","
+DIVIDE(
+    [Total Sessions Previous Year],
+    [Total Active Users Previous Year]
+)"
+"Sessions Per User YoY %","
+DIVIDE(
+    [Sessions Per User Current Year] - [Sessions Per User Previous Year],
+    [Sessions Per User Previous Year]
+)"
+"Sessions Per User YoY % Formatted","
+VAR YoY_Value = [Sessions Per User YoY %]
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+VAR Threshold = 0.0005 
+
+VAR Arrow = 
+    SWITCH( TRUE(),
+        YoY_Value >= Threshold, UNICHAR(9650),  -- (▲)
+        YoY_Value <= -Threshold, UNICHAR(9660), -- (▼)
+        BLANK()
+    )
+    
+RETURN
+IF(
+    HistoryExists, 
+    Arrow & "" "" & FORMAT(YoY_Value, ""0.0%;0.0%;0.0%""),
+    "" ""
+)"
+"Sessions YoY %","
+DIVIDE(
+    [Total Sessions Current Year] - [Total Sessions Previous Year],
+    [Total Sessions Previous Year]
+)"
+"Sessions YoY % Formatted","
+VAR YoY_Value = [Sessions YoY %]
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+VAR Threshold = 0.0005 
+
+VAR Arrow = 
+    SWITCH( TRUE(),
+        YoY_Value >= Threshold, UNICHAR(9650),  -- (▲)
+        YoY_Value <= -Threshold, UNICHAR(9660), -- (▼)
+        BLANK()
+    )
+    
+RETURN
+IF(
+    HistoryExists, 
+    Arrow & "" "" & FORMAT(YoY_Value, ""0.0%;0.0%;0.0%""),
+    "" ""
+)"
+"Subtitle_Year_vs_PrevYear","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+VAR SelectedMonth = SELECTEDVALUE('Calendar'[Month])
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+RETURN
+IF(
+    HistoryExists,
+    IF(
+        ISFILTERED('Calendar'[Month]) && NOT(ISBLANK(SelectedMonth)),
+        SelectedMonth & "" "" & FORMAT(LatestYear,""0"") & "" vs. "" & SelectedMonth & "" "" & FORMAT(YearBefore,""0""),
+        FORMAT(LatestYear,""0"") & "" vs. "" & FORMAT(YearBefore,""0"")
+    ),
+    "" ""
+)"
+"Title_KPI_Universal","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+VAR SelectedMonth = SELECTEDVALUE('Calendar'[Month])
+
+VAR HistoryExists = 
+    CALCULATE(
+        COUNTROWS('Data GA4'), 
+        'Calendar'[Year] = YearBefore
+    ) > 0
+
+RETURN
+IF(
+    HistoryExists, 
+    IF(
+        ISFILTERED('Calendar'[Month]) && NOT(ISBLANK(SelectedMonth)), 
+        ""vs. "" & SelectedMonth & "" "" & FORMAT(YearBefore,""0""),
+        ""vs. "" & FORMAT(YearBefore,""0"")
+    ),
+    "" ""
+)"
+"Tooltip_Title","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+SELECTEDVALUE('Calendar'[Month]) & "" "" & FORMAT(LatestYear,""0"")"
+"Tooltip_Title_Heatmap","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+SELECTEDVALUE('Data GA4'[website]) & "" | "" & SELECTEDVALUE('Calendar'[Month]) & "" "" & FORMAT(LatestYear,""0"")"
+"Tooltip_Title_Previous_Year","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+
+RETURN
+""vs. "" & SELECTEDVALUE('Calendar'[Month]) & "" "" & FORMAT(YearBefore,""0"")"
+"Total Active Users","SUM('Data GA4'[active_users])"
+"Total Active Users Current Year","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+CALCULATE(
+    [Total Active Users],
+    'Calendar'[Year] = LatestYear
+)"
+"Total Active Users Previous Year","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+RETURN
+CALCULATE(
+    [Total Active Users],
+    'Calendar'[Year] = YearBefore
+)"
+"Total Engaged Sessions","SUM('Data GA4'[engaged_sessions])"
+"Total Engaged Sessions Current Year","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+CALCULATE(
+    [Total Engaged Sessions],
+    'Calendar'[Year] = LatestYear
+)"
+"Total Engaged Sessions Previous Year","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+RETURN
+CALCULATE(
+    [Total Engaged Sessions],
+    'Calendar'[Year] = YearBefore
+)"
+"Total Engagement Rate","DIVIDE([Total Engaged Sessions], [Total Sessions])"
+"Total Sessions","SUM('Data GA4'[sessions])"
+"Total Sessions Current Year","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+CALCULATE(
+    [Total Sessions],
+    'Calendar'[Year] = LatestYear
+)"
+"Total Sessions Previous Year","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+RETURN
+CALCULATE(
+    [Total Sessions],
+    'Calendar'[Year] = YearBefore
+)"
+"Total User Engagement Duration","SUM('Data GA4'[user_engagement_duration])"
+"Total User Engagement Duration Current Year","
+VAR LatestYear = MAX('Calendar'[Year])
+RETURN
+CALCULATE(
+    [Total User Engagement Duration],
+    'Calendar'[Year] = LatestYear
+)"
+"Total User Engagement Duration Previous Year","
+VAR LatestYear = MAX('Calendar'[Year])
+VAR YearBefore = LatestYear - 1
+RETURN
+CALCULATE(
+    [Total User Engagement Duration],
+    'Calendar'[Year] = YearBefore
+)"
