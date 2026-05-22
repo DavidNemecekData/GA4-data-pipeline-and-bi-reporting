@@ -1,16 +1,16 @@
-# 🗂️ Data Directory: Processed GA4 Analytics Datasets
+# Data Directory: Processed GA4 Analytics Datasets
 
 This directory contains the final, transformed datasets responsible for powering the Power BI dashboard.
 All datasets in this directory are 100% analysis-ready and formatted for direct, seamless ingestion into Power BI.
 
-## 📂 Directory Contents
+## Directory Contents
 * `2023.csv`
 * `2024.csv`
 * `2025.csv`
 
 ---
 
-## 📊 Dataset Specifications & Structure
+## Dataset Specifications & Structure
 
 Every CSV file in this directory has undergone rigorous transformation via the Python ETL pipeline (`2_data_processing.ipynb`) and adheres to the following data standards:
 

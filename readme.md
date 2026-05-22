@@ -5,19 +5,19 @@
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
 ![Power BI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white)
 
-## 📌 Quick Links & Live Demos
+## Quick Links & Live Demos
 Check out the final results directly
-* 📊 **[Interactive Power BI Dashboard](https://mavenshowcase.com/project/56439)**
-* 📁 **[Explore the Python ETL Scripts](./notebooks/)**
+* **[Interactive Power BI Dashboard](https://mavenshowcase.com/project/56439)**
+* **[Explore the Python ETL Scripts](./notebooks/)**
 
 ---
 
-## 📖 Project Overview
+## Project Overview
 This project demonstrates an end-to-end automated analytics solution, bypassing the limitations of the native Google Analytics 4 (GA4) interface. It extracts raw web traffic data across multiple domains via the GA4 API, processes it into a clean tabular format using Python, and feeds it into a highly dynamic, UX-optimized Power BI dashboard.
 
 **The Challenge:** Relying on the standard GA4 web interface for multi-property reporting is manual, slow, and limits custom calculations. The goal was to build a scalable ETL pipeline that automatically fetches high-cardinality data, handles edge cases in data types, and provides a "Single Source of Truth" dashboard for immediate business insights.
 
-### 🎯 Core Objectives:
+### Core Objectives:
 1. **Automate Data Extraction:** Connect to the GA4 Data API to fetch custom dimensions and metrics across multiple websites.
 2. **Robust Data Transformation:** Cleanse JSON responses, enforce strict data typing, and engineer new analytical features using `pandas` and `numpy`.
 3. **Design a Star Schema:** Model the transformed data in Power BI with a dedicated Calendar dimension for scalable reporting.
@@ -26,7 +26,7 @@ This project demonstrates an end-to-end automated analytics solution, bypassing 
 
 ---
 
-## 📸 Final Output Preview
+## Final Output Preview
 Here is a snapshots of the final reporting layer built on top of the transformed data model.    
 **Main Canvas**
 ![Power BI Dashboard Preview](./docs/report_preview_first_page.png)
@@ -34,11 +34,11 @@ Here is a snapshots of the final reporting layer built on top of the transformed
 ![Power BI Dashboard Preview](./docs/report_preview_second_page.png)
 
 You can find all the DAX measures used here:    
-👉 **[View the DAX code](./power_bi/dax_code.csv)**
+**[View the DAX code](./power_bi/dax_code.csv)**
 
 ---
 
-## 🏗️ Solution Architecture & Python ETL Pipeline
+## Solution Architecture & Python ETL Pipeline
 
 ### Phase 1: GA4 Data Extraction (`1_data_download.ipynb`)
 **Goal:** Automate the process of fetching key performance metrics from the GA4 Data API for a list of specified websites.
@@ -72,7 +72,7 @@ You can find all the DAX measures used here:
 
 ---
 
-## 📊 Data Modeling & Advanced DAX (Power BI)
+## Data Modeling & Advanced DAX (Power BI)
 
 ### 1. Data Modeling
 * **Measure Organization:** Abstracted all DAX calculations into a dedicated `_Key Measures` table for clean model architecture and maintainability.

@@ -1,20 +1,20 @@
-# 📊 Power BI Reporting & Advanced UX Dashboard
+# Power BI Reporting & Advanced UX Dashboard
 
 This directory contains the final presentation layer of the Multi-Property GA4 Analytics Pipeline. The interactive dashboard translates the transformed data outputted by the Python ETL scripts into actionable, high-level business insights tailored for digital marketing and portfolio management.
 
 *Note: To ensure confidentiality and protect sensitive business assets, all data presented in this portfolio dashboard has been altered and randomized. The numbers and trends do not reflect actual real-world web traffic.*
 
-## 🌐 Interactive Dashboard
+## Interactive Dashboard
 
 You can explore the fully interactive version of the dashboard online:    
-👉 **[View the Interactive Report](https://mavenshowcase.com/project/56439)**
+**[View the Interactive Report](https://mavenshowcase.com/project/56439)**
 
 You can find all the DAX measures used here:    
-👉 **[View the DAX code](dax_code.csv)**
+**[View the DAX code](dax_code.csv)**
 
 ---
 
-## 💡 Key Features & Analytical Capabilities
+## Key Features & Analytical Capabilities
 
 * **Executive KPI Banner:** Tracks core web metrics including Active Users, New Users, Sessions, Engagement Rate, and User Engagement Duration, complete with dynamic Year-over-Year (YoY) performance indicators.
 * **Dynamic Metric Toggling (Bookmarks):** An interactive sidebar menu allows users to switch the report view between the 5 core metrics. This approach utilizes Bookmarks to perfectly preserve distinct Y-axis formatting (e.g., percentages vs. `HH:MM:SS` duration formats) across different views.
@@ -23,7 +23,7 @@ You can find all the DAX measures used here:
 
 ---
 
-## 🧮 DAX Implementation Highlights
+## DAX Implementation Highlights
 
 The report relies on a centralized `_Key Measures` table, keeping the data model clean. Key DAX implementations include:
 

@@ -1,17 +1,17 @@
-# 🐍 Python ETL Pipeline: GA4 Data Extraction & Processing
+# Python ETL Pipeline: GA4 Data Extraction & Processing
 
 This directory contains the Python Jupyter Notebooks responsible for the **Extract, Transform, and Load (ETL)** phases of the Multi-Property GA4 Analytics project. 
 
 The pipeline extracts raw data from the Google Analytics 4 Data API, handles complex JSON responses, performs feature engineering, and exports a clean, analysis-ready CSV file for Power BI ingestion.
 
-## 📂 Directory Contents
+## Directory Contents
 * `1_data_download.ipynb`: Extraction script interacting with the GA4 API.
 * `2_data_processing.ipynb`: Transformation script utilizing Pandas and NumPy.
 * `requirements.txt`: Python dependencies required to run the notebooks.
 
 ---
 
-## 📓 Notebook 1: GA4 Data Extraction for Multiple Websites
+## Notebook 1: GA4 Data Extraction for Multiple Websites
 
 **Goal:**
 This notebook automates the process of fetching key performance metrics from the Google Analytics 4 (GA4) Data API for a list of specified websites.
@@ -26,7 +26,7 @@ This notebook automates the process of fetching key performance metrics from the
 
 ---
 
-## 📓 Notebook 2: Data Processing and Preparation for Power BI
+## Notebook 2: Data Processing and Preparation for Power BI
 
 **Goal:**
 The purpose of this notebook is to process the raw JSON files downloaded from the Google Analytics API. The script transforms the raw data into a single, clean, and analysis-ready dataset suitable for visualization in Power BI.
